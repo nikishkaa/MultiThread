@@ -24,7 +24,20 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
         while (running) {
-            market.get();
+            synchronized (market) {
+                if (market.isFlag()) {
+                    int product = market.get();
+                    stream.printf("Consumer %d use product %d.\n", id, product);
+                    market.setFlag(false);
+                    market.notifyAll();
+                } else {
+                    try {
+                        market.wait();
+                    } catch (InterruptedException exception) {
+                        stream.println(exception);
+                    }
+                }
+            }
         }
     }
 

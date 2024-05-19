@@ -24,7 +24,21 @@ public class Producer implements Runnable {
         int product = 1;
 
         while (running) {
-            market.put(product++);
+
+            try {
+                synchronized (market) {
+                    if (!market.isFlag()) {
+                        market.put(product);
+                        stream.println("Producer put product: " + product++);
+                        market.setFlag(true);
+                        market.notifyAll();
+                    } else {
+                      market.wait();
+                    }
+                }
+            } catch (InterruptedException exception) {
+                stream.println(exception);
+            }
         }
     }
 
