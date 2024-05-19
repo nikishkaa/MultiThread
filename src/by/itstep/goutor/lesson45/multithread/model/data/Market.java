@@ -1,30 +1,22 @@
 package by.itstep.goutor.lesson45.multithread.model.data;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+
 public class Market {
-    int product;
-    private volatile boolean flag;
+    private BlockingQueue<Integer> queue;
 
     public Market() {
+        queue = new ArrayBlockingQueue<>(1);
     }
 
-    public Market(int product) {
-        this.product = product;
-    }
-
-    public synchronized int get() {
-        return product;
+    public  int get() throws InterruptedException {
+        return queue.take();
     }
 
 
-    public synchronized void put(int product) {
-        this.product = product;
+    public  void put(int product) throws InterruptedException {
+        queue.put(product);
     }
 
-    public boolean isFlag() {
-        return flag;
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
 }

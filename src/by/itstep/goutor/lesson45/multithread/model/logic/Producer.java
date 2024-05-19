@@ -10,10 +10,12 @@ public class Producer implements Runnable {
     private Market market;
     private Thread thread;
     private PrintStream stream;
+    private int id;
 
-    public Producer(Market market, PrintStream stream) {
+    public Producer(Market market, PrintStream stream, int id) {
         this.market = market;
         this.stream = stream;
+        this.id = id;
         running = true;
         thread = new Thread(this);
         thread.start();
@@ -24,18 +26,10 @@ public class Producer implements Runnable {
         int product = 1;
 
         while (running) {
-
             try {
-                synchronized (market) {
-                    if (!market.isFlag()) {
-                        market.put(product);
-                        stream.println("Producer put product: " + product++);
-                        market.setFlag(true);
-                        market.notifyAll();
-                    } else {
-                      market.wait();
-                    }
-                }
+                market.put(product);
+                stream.printf("Producer id %d put product %d.\n ", id, product++);
+                TimeUnit.MICROSECONDS.sleep(10);
             } catch (InterruptedException exception) {
                 stream.println(exception);
             }

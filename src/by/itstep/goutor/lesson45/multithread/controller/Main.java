@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Market market = new Market();
-        Producer producer = new Producer(market, System.out);
+        Producer producer1 = new Producer(market, System.out, 1000);
+        Producer producer2= new Producer(market, System.out, 2000);
         Consumer consumer1 = new Consumer(market, System.out, 1);
         Consumer consumer2 = new Consumer(market, System.out, 2);
         Consumer consumer3 = new Consumer(market, System.out, 3);
@@ -19,7 +20,8 @@ public class Main {
 
 
         TimeUnit.SECONDS.sleep(10);
-        producer.stop();
+        producer1.stop();
+        producer2.stop();
         consumer1.stop();
         consumer2.stop();
         consumer3.stop();
