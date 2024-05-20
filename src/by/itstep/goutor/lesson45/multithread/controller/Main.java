@@ -11,6 +11,7 @@ public class Main {
         Market market = new Market();
         Producer producer1 = new Producer(market, System.out, 1000);
         Producer producer2= new Producer(market, System.out, 2000);
+
         Consumer consumer1 = new Consumer(market, System.out, 1);
         Consumer consumer2 = new Consumer(market, System.out, 2);
         Consumer consumer3 = new Consumer(market, System.out, 3);
