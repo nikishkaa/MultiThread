@@ -21,6 +21,7 @@ public class Producer implements Runnable {
         thread.start();
     }
 
+
     @Override
     public void run() {
         int product = 1;
