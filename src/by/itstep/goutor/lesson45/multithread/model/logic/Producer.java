@@ -12,6 +12,7 @@ public class Producer implements Runnable {
     private PrintStream stream;
     private int id;
 
+
     public Producer(Market market, PrintStream stream, int id) {
         this.market = market;
         this.stream = stream;
