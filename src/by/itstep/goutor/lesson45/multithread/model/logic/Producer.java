@@ -5,6 +5,7 @@ import by.itstep.goutor.lesson45.multithread.model.data.Market;
 import java.io.PrintStream;
 import java.util.concurrent.TimeUnit;
 
+
 public class Producer implements Runnable {
     private boolean running;
     private Market market;
