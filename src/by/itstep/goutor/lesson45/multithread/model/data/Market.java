@@ -14,7 +14,6 @@ public class Market {
         return queue.take();
     }
 
-
     public  void put(int product) throws InterruptedException {
         queue.put(product);
     }
